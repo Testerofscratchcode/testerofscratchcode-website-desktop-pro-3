@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testerofscratchcode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
+            color: #f0f0f0;
+            padding: 20px;
+            font-family: "Poppins", Arial, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .day-mode {
+            background: linear-gradient(135deg, #fef3c7, #f8f1e5, #fde68a);
+            color: #222;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #60a5fa, #3b82f6);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.6);
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.5);
+            border: 3px solid #60a5fa;
+        }
+
+        .about-me, .instructions, .credits, .studios {
+            background: rgba(55, 65, 81, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .about-me:hover, .instructions:hover, .credits:hover, .studios:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(96, 165, 250, 0.4);
+        }
+
+        .day-mode .about-me,
+        .day-mode .instructions,
+        .day-mode .credits,
+        .day-mode .studios {
+            background: rgba(255, 255, 255, 0.9);
+            color: #222;
+            border: 1px solid rgba(251, 191, 36, 0.5);
+        }
+
+        /* Best Project Showcase Styles */
+        .best-project-showcase {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.1));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(34, 197, 94, 0.3);
+            margin: 30px 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .best-project-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .best-project-showcase:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(34, 197, 94, 0.5);
+            border-color: rgba(34, 197, 94, 0.8);
+        }
+
+        .best-project-header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .day-mode .best-project-showcase {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.15));
+            border-color: rgba(34, 197, 94, 0.7);
+        }
+
+        /* Best Project Showcase Other Styles */
+        .best-project-showcase-other {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.1));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(251, 191, 36, 0.5);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(251, 191, 36, 0.3);
+            margin: 30px 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .best-project-showcase-other::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+        }
+
+        .best-project-showcase-other:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(251, 191, 36, 0.5);
+            border-color: rgba(251, 191, 36, 0.8);
+        }
+
+        .best-project-header-other {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .day-mode .best-project-showcase-other {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.15));
+            border-color: rgba(251, 191, 36, 0.7);
+        }
+
+        /* Updated Project Navigation - now positioned below the project content */
+        .project-navigation {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .project-content {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+
+        .nav-arrow {
+            background: linear-gradient(45deg, #60a5fa, #a78bfa);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+        }
+
+        .nav-arrow:hover:not(:disabled) {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.8);
+        }
+
+        .nav-arrow:disabled {
+            background: linear-gradient(45deg, #6b7280, #4b5563);
+            cursor: not-allowed;
+            opacity: 0.5;
+            box-shadow: none;
+        }
+
+        /* Project Indicator positioned below the game in navigation controls */
+        .project-indicator {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(107, 114, 128, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot:hover {
+            background: rgba(96, 165, 250, 0.7);
+            transform: scale(1.2);
+        }
+
+        .indicator-dot.active {
+            background: linear-gradient(45deg, #60a5fa, #a78bfa);
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
+        }
+
+        .project-section {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .game-container, .right-side {
+            flex: 1 1 400px;
+            max-width: 600px;
+            min-width: 350px;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-container iframe {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #60a5fa, #a78bfa, #d8b4fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2em;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-family: 'Orbitron', monospace;
+            color: #a78bfa;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #60a5fa;
+        }
+
+        a {
+            font-weight: 600;
+            color: #a78bfa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #d8b4fe;
+        }
+        /* Separator Effect */
+        .separator {
+            border: none;
+            height: 5px;
+            width: 80%;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa, #d8b4fe);
+            border-radius: 50px;
+            margin: 30px 0;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scaleX(0.95); }
+            100% { opacity: 1; transform: scaleX(1); }
+        }
+
+
+        .separator {
+            border: none;
+            height: 4px;
+            width: 80%;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa, #d8b4fe);
+            border-radius: 50px;
+            margin: 30px auto;
+        }
+
+        ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+            font-size: 0.8em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .game-container, .right-side {
+                max-width: 100%;
+                min-width: auto;
+                width: 100%;
+            }
+
+            .nav-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .navigation-controls {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body class="night-mode">
+    <button class="toggle-btn" onclick="toggleMode()">Switch to Day Mode</button>
+
+    <div class="logo">
+        <img src="https://cdn2.scratch.mit.edu/get_image/user/105361166_60x60.png" alt="Prateek Priyadarshi">
+    </div>
+
+    <h1>TESTEROFSCRATCHCODE</h1>
+
+    <div class="about-me">
+        <h3>About Me</h3>
+        <p>My name is <strong>Prateek Priyadarshi</strong>, also known as <a href="https://scratch.mit.edu/users/testerofscratchcode/" target="_blank">@testerofscratchcode</a>.</p>
+        <p>I'm a passionate coder who loves creating innovative games and science-related projects. My mission is to explore new frontiers in programming and push the boundaries of what's possible with code!</p>
+        <p><strong>Contact:</strong> <a href="mailto:testerofscratchcode@gmail.com">testerofscratchcode@gmail.com</a></p>
+    </div>
+
+    <!-- Project Navigation Section with Navigation Below -->
+    <div class="project-navigation">
+        <div class="project-content">
+            <!-- Project 1: Minecraft Clicker Game -->
+            <div class="project-section active" id="project0">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>Minecraft Clicker Game 5.3</h2>
+                        <iframe src="https://turbowarp.org/1183301080/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🎮 Instructions:</h3>
+                            <ul>
+                                <li>Optimized for PC, mobile compatible</li>
+                                <li>Click the green flag to begin</li>
+                                <li>Challenge yourself for highest score</li>
+                                <li>Kindly leave your feedback with us on <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Thanks to <strong>Internet Archive</strong> for assets.</p>
+                            <p>Rest done by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                            <p>Animation systems by <a href="https://scratch.mit.edu/users/JustFinishedCoding/">@JustFinishedCoding</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Destroy Taco -->
+            <div class="project-section" id="project1">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>Destroy Taco v.2.0.A.1</h2>
+                        <iframe src="https://turbowarp.org/1145882246/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🎮 Mission:</h3>
+                            <ul>
+                                <li>Cross-platform compatibility (PC recommended)</li>
+                                <li>Initialize with the green flag</li>
+                                <li>Collect 100 gold coins + 100 money points to win</li>
+                                <li>Master the art of taco destruction</li>
+                                <li>Kindly leave your feedback with us on <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Soundtrack by <strong>ai-song.ai</strong></p>
+                            <p>Visual assets courtesy of <strong>Google</strong></p>
+                            <p>Rest done by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Breakout Game -->
+            <div class="project-section" id="project2">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>Breakout Game! 1.2v</h2>
+                        <iframe src="https://turbowarp.org/988367218/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🎮 Rules:</h3>
+                            <ul>
+                                <li>Best on PC, mobile supported</li>
+                                <li>Race against time</li>
+                                <li>Classic arcade action</li>
+                                <li>Kindly leave your feedback with us on <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Thanks:</h3>
+                            <p>Special thanks to my <strong>CS Teacher</strong>!</p>
+                            <p>Rest done by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Shooter Game -->
+            <div class="project-section" id="project3">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>Shooter Game v 3.0</h2>
+                        <iframe src="https://turbowarp.org/945498912/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🎮 Combat:</h3>
+                            <ul>
+                                <li>PC optimized (mobile limited)</li>
+                                <li>Use WASD for movement</li>
+                                <li>Survive time-limited battles</li>
+                                <li>Share your feedback with us on <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Music by <a href="https://scratch.mit.edu/users/GRA0007/">@GRA0007</a></p>
+                            <p>Movement by <a href="https://scratch.mit.edu/users/griffpatch/">@griffpatch</a></p>
+                            <p>Rest done by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls now positioned below the project content -->
+        <div class="navigation-controls">
+            <button class="nav-arrow" onclick="previousProject()" id="leftArrow">‹</button>
+            <div class="project-indicator">
+                <div class="indicator-dot active" onclick="goToProject(0)"></div>
+                <div class="indicator-dot" onclick="goToProject(1)"></div>
+                <div class="indicator-dot" onclick="goToProject(2)"></div>
+                <div class="indicator-dot" onclick="goToProject(3)"></div>
+            </div>
+            <button class="nav-arrow" onclick="nextProject()" id="rightArrow">›</button>
+        </div>
+    <hr class="separator">
+    </div>
+
+
+    <div class="studios">
+        <h3>My Scratch Studios</h3>
+        <ul>
+            <li><a href="https://scratch.mit.edu/studios/35513122/" target="_blank">⚡The Celestial Frontier⚡</a> - Explore the cosmos through code</li>
+            <li><a href="https://scratch.mit.edu/studios/35765551/" target="_blank">⚡Friend Fusion Studio⚡</a> - Collaborative projects with fellow creators</li>
+            <li><a href="https://scratch.mit.edu/studios/36195583/" target="_blank">⚡Tester's Testing⚡</a> - Experimental builds and prototypes</li>
+            <li><a href="https://scratch.mit.edu/studios/35607518/" target="_blank">⚡Nebula Nexus⚡</a> - Only best project comes here! You can give me your project links I will add them if they are great.</li>
+        </ul>
+    <hr class="separator">
+    </div>
+
+
+    <!-- Best Project Showcase -->
+    <div class="best-project-showcase">
+        <div class="best-project-header">
+            <h2 style="color: #22c55e; text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);">🏆 MY BEST PROJECT 🏆</h2>
+        </div>
+        <div class="content">
+            <div class="game-container">
+                <h2 style="color: #16a34a;">⛏️ Minecraft Clicker Game 5.3 ⛏️</h2>
+                <iframe src="https://turbowarp.org/1183301080/embed" width="485" height="402" frameborder="0" allowfullscreen style="border: 3px solid #22c55e; box-shadow: 0 0 30px rgba(34, 197, 94, 0.6);"></iframe>
+            </div>
+            <div class="right-side">
+                <div class="instructions" style="border: 2px solid #22c55e; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));">
+                    <h3 style="color: #22c55e;">🎮 Why This is My Best:</h3>
+                    <ul>
+                        <li>Most polished gameplay mechanics</li>
+                        <li>Highest user engagement and ratings</li>
+                        <li>Advanced clicker progression system</li>
+                        <li>Optimized for all platforms</li>
+                        <li>Represents my coding evolution!</li>
+                        <li>Perfect balance of fun and challenge</li>
+                    </ul>
+                </div>
+                <div class="credits" style="border: 2px solid #22c55e; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));">
+                    <h3 style="color: #22c55e;">🌟 Credits:</h3>
+                    <p><strong>This is the crown jewel of my projects!</strong></p>
+                    <p>Thanks to <strong>Internet Archive</strong> for assets</p>
+                    <p>Animation systems by <a href="https://scratch.mit.edu/users/JustFinishedCoding/" style="color: #22c55e;">@JustFinishedCoding</a></p>
+                    <p>Crafted with dedication by <a href="https://scratch.mit.edu/users/testerofscratchcode/" style="color: #22c55e;">@testerofscratchcode</a></p>
+                </div>
+            </div>
+        </div>
+        <hr class="separator" style="background: linear-gradient(90deg, #22c55e, #16a34a, #15803d);">
+    </div>
+
+    <!-- Best Project Till Now Section -->
+    <div class="best-project-showcase-other">
+        <div class="best-project-header-other">
+            <h2 style="color: #fbbf24; text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);">🏆 Best Project Till Now 🏆</h2>
+        </div>
+        <div class="content">
+            <div class="game-container">
+                <h2 style="color: #f59e0b;">✨ Draw Billie Eilish! ✨</h2>
+                <iframe src="https://scratch.mit.edu/projects/1189917672/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+            </div>
+            <div class="right-side">
+                <div class="instructions" style="border: 2px solid #fbbf24; background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));">
+                    <h3 style="color: #fbbf24;">✨ Instructions: </h3>
+                    <ul>
+                        <li>Hey guys :))</li>
+                        <li>Click any key to go to the next slide!</li>
+                        <li>This is a step-by-step guide on how to draw Billie Eilish!</li>
+                        <li>This image is 100% original and I did use a picture for reference!</li>
+                    </ul>
+                </div>
+                <div class="credits" style="border: 2px solid #fbbf24; background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));">
+                    <h3 style="color: #fbbf24;">🌟 Achievement:</h3>
+                    <p>Created with passion by <a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a></p>
+                    <p>Thank you <a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a> for allowing me to use your Project</p>
+                    <P>I would like you guys to check out here Profile<a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a> for more amazing up coming tutorials!</p>
+                </div>
+            </div>
+        </div>
+        <hr class="separator" style="background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);">
+    </div>
+
+    <script>
+        let currentProject = 0;
+        const totalProjects = 4;
+
+        function toggleMode() {
+            const body = document.body;
+            const button = document.querySelector(".toggle-btn");
+            
+            body.classList.toggle("day-mode");
+            body.classList.toggle("night-mode");
+            
+            button.textContent = body.classList.contains("day-mode") ? 
+                "Switch to Night Mode" : "Switch to Day Mode";
+        }
+
+        function updateProjectDisplay() {
+            // Hide all projects first
+            for (let i = 0; i < totalProjects; i++) {
+                const project = document.getElementById(`project${i}`);
+                project.classList.remove('active');
+            }
+            
+            // Show current project
+            const currentProjectElement = document.getElementById(`project${currentProject}`);
+            currentProjectElement.classList.add('active');
+
+            // Update arrow states
+            document.getElementById('leftArrow').disabled = (currentProject === 0);
+            document.getElementById('rightArrow').disabled = (currentProject === totalProjects - 1);
+
+            // Update indicators
+            const dots = document.querySelectorAll('.indicator-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentProject);
+            });
+        }
+
+        function nextProject() {
+            if (currentProject < totalProjects - 1) {
+                currentProject++;
+                updateProjectDisplay();
+            }
+        }
+
+        function previousProject() {
+            if (currentProject > 0) {
+                currentProject--;
+                updateProjectDisplay();
+            }
+        }
+
+        function goToProject(index) {
+            if (index >= 0 && index < totalProjects) {
+                currentProject = index;
+                updateProjectDisplay();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case 'ArrowLeft':
+                    previousProject();
+                    break;
+                case 'ArrowRight':
+                    nextProject();
+                    break;
+                case ' ':
+                    toggleMode 
+                case ' ':
+                    toggleMode();
+                    event.preventDefault();
+                    break;           
+        }
+        });
+
+        // Initialize on page load
+        updateProjectDisplay();
+    </script>
+</body>
+</html>
