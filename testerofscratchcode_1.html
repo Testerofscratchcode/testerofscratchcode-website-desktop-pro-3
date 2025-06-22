@@ -242,6 +242,7 @@
             padding: 12px 20px;
             border-radius: 25px;
             backdrop-filter: blur(15px);
+            flex-wrap: wrap;
         }
 
         .indicator-dot {
@@ -369,7 +370,6 @@
             100% { opacity: 1; transform: scaleX(1); }
         }
 
-
         .separator {
             border: none;
             height: 4px;
@@ -396,6 +396,20 @@
             left: 0;
             color: #60a5fa;
             font-size: 0.8em;
+        }
+
+        /* Game Counter Display */
+        .game-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #a78bfa, #d8b4fe);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(167, 139, 250, 0.4);
         }
 
         @media (max-width: 768px) {
@@ -427,11 +441,29 @@
             .navigation-controls {
                 padding: 0 10px;
             }
+
+            .project-indicator {
+                padding: 10px 15px;
+                gap: 8px;
+            }
+
+            .indicator-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .game-counter {
+                top: 10px;
+                right: 10px;
+                font-size: 0.9em;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
 <body class="night-mode">
     <button class="toggle-btn" onclick="toggleMode()">Switch to Day Mode</button>
+    <div class="game-counter" id="gameCounter">Games: 8/8</div>
 
     <div class="logo">
         <img src="https://cdn2.scratch.mit.edu/get_image/user/105361166_60x60.png" alt="Prateek Priyadarshi">
@@ -556,6 +588,118 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Project 5: NEW GAME - Racing Game -->
+            <div class="project-section" id="project4">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>🏎️ Racing Championship 2.0</h2>
+                        <iframe src="https://turbowarp.org/YOUR_RACING_GAME_ID/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🏁 Race Instructions:</h3>
+                            <ul>
+                                <li>Use arrow keys to steer your car</li>
+                                <li>Avoid obstacles and other racers</li>
+                                <li>Complete 3 laps to win the championship</li>
+                                <li>Beat your best lap time!</li>
+                                <li>Share your results with <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Car sprites by <strong>Racing Assets Pack</strong></p>
+                            <p>Physics engine optimization by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                            <p>Sound effects courtesy of <strong>FreeSound.org</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6: NEW GAME - Puzzle Adventure -->
+            <div class="project-section" id="project5">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>🧩 Puzzle Adventure Quest</h2>
+                        <iframe src="https://turbowarp.org/YOUR_PUZZLE_GAME_ID/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🧠 Puzzle Challenge:</h3>
+                            <ul>
+                                <li>Solve increasingly difficult puzzles</li>
+                                <li>Use logic and strategy to progress</li>
+                                <li>Unlock new levels and abilities</li>
+                                <li>Can you solve all 50 levels?</li>
+                                <li>Report bugs to <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Puzzle mechanics inspired by classic games</p>
+                            <p>Level design by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                            <p>Background music by <strong>Kevin MacLeod</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7: NEW GAME - Space Explorer -->
+            <div class="project-section" id="project6">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>🚀 Space Explorer Odyssey</h2>
+                        <iframe src="https://turbowarp.org/YOUR_SPACE_GAME_ID/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🌌 Space Mission:</h3>
+                            <ul>
+                                <li>Navigate through asteroid fields</li>
+                                <li>Collect fuel and power-ups</li>
+                                <li>Battle alien spacecraft</li>
+                                <li>Explore multiple galaxies</li>
+                                <li>Join the space community at <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Space assets from <strong>NASA Image Gallery</strong></p>
+                            <p>Ship mechanics by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                            <p>Soundtrack by <strong>Orbital Sounds</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8: NEW GAME - Platformer Adventure -->
+            <div class="project-section" id="project7">
+                <div class="content">
+                    <div class="game-container">
+                        <h2>🏃‍♂️ Platformer Hero Adventure</h2>
+                        <iframe src="https://turbowarp.org/YOUR_PLATFORMER_GAME_ID/embed" width="485" height="402" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions">
+                            <h3> 🎯 Adventure Guide:</h3>
+                            <ul>
+                                <li>Jump and run through challenging levels</li>
+                                <li>Collect coins and avoid enemies</li>
+                                <li>Find hidden secrets and bonus areas</li>
+                                <li>Defeat the final boss to save the kingdom</li>
+                                <li>Share your high scores with <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></li>
+                            </ul>
+                        </div>
+                        <div class="credits">
+                            <h3>Credits:</h3>
+                            <p>Character sprites by <strong>Pixel Art Community</strong></p>
+                            <p>Level design and coding by <a href="https://scratch.mit.edu/users/testerofscratchcode/">@testerofscratchcode</a></p>
+                            <p>Jump physics inspired by <a href="https://scratch.mit.edu/users/griffpatch/">@griffpatch</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Navigation Controls now positioned below the project content -->
@@ -566,9 +710,14 @@
                 <div class="indicator-dot" onclick="goToProject(1)"></div>
                 <div class="indicator-dot" onclick="goToProject(2)"></div>
                 <div class="indicator-dot" onclick="goToProject(3)"></div>
+                <div class="indicator-dot" onclick="goToProject(4)"></div>
+                <div class="indicator-dot" onclick="goToProject(5)"></div>
+                <div class="indicator-dot" onclick="goToProject(6)"></div>
+                <div class="indicator-dot" onclick="goToProject(7)"></div>
             </div>
             <button class="nav-arrow" onclick="nextProject()" id="rightArrow">›</button>
         </div>
+
     <hr class="separator">
     </div>
 
