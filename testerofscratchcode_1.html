@@ -867,6 +867,33 @@
                     </div>
                 </div>
             </div>
+            <!-- Best Project 3 -->
+            <div class="best-project-section-other" id="bestProject2" style="display: none;">
+                <div class="content">
+                    <div class="game-container">
+                        <h2 style="color: #f59e0b;">✨ Snake On Scratch ✨</h2>
+                        <iframe src="https://scratch.mit.edu/projects/1131760859/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <div class="right-side">
+                        <div class="instructions" style="border: 2px solid #fbbf24; background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));">
+                            <h3 style="color: #fbbf24;">✨ Instructions: </h3>
+                            <ul>
+                                <li>It's been a while since I shared a game, so I just made this!</li>
+                                <li>Use the arrow keys (⬆️⬇️⬅️➡️) to control the snake.</li>
+                                <li>Eat the food to grow longer and try to get the highest score possible.</li>
+                                <li>Avoid running into the walls or yourself!</li>
+                                <li>Have fun and challenge your friends!</li>
+                            </ul>
+                        </div>
+                        <div class="credits" style="border: 2px solid #fbbf24; background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));">
+                            <h3 style="color: #fbbf24;">🌟 Credits:</h3>
+                            <ul style="text-align:left;">
+                                <li>All credit goes to <a href="https://scratch.mit.edu/users/Vextronic/" style="color: #fbbf24;">@Vextronic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Navigation Controls for Best Project Till Now (below the project) -->
         <div class="navigation-controls best-project-nav-controls" style="margin-top: 30px;">
@@ -874,6 +901,7 @@
             <div class="project-indicator best-project-indicator">
                 <div class="indicator-dot active" onclick="goToBestProject(0)"></div>
                 <div class="indicator-dot" onclick="goToBestProject(1)"></div>
+                <div class="indicator-dot" onclick="goToBestProject(2)"></div>
             </div>
             <button class="nav-arrow" onclick="nextBestProject()" id="rightBestArrow">›</button>
         </div>
@@ -961,7 +989,7 @@
 
         // Best Projects Navigation
         let currentBestProject = 0;
-        const totalBestProjects = 2; // Updated for two best projects
+        const totalBestProjects = 3; // Updated for two best projects
 
         function updateBestProjectDisplay() {
             for (let i = 0; i < totalBestProjects; i++) {
