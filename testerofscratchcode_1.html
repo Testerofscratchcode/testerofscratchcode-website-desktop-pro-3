@@ -401,6 +401,18 @@
             font-size: 0.8em;
         }
 
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+        .gradient-link {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 15px;
@@ -472,10 +484,89 @@
         .best-project-section-other {
             width: 100%;
         }
+
+        /* Floating Help Menu Button (top-right) */
+        .help-menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #60a5fa, #3b82f6);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
+        }
+        .help-menu-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.6);
+        }
+        .help-menu-dropdown {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(31, 41, 55, 0.98);
+            border: 2px solid #60a5fa;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(96, 165, 250, 0.25);
+            min-width: 220px;
+            padding: 12px 0;
+            z-index: 1002;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .help-menu-dropdown.show {
+            display: flex;
+            animation: fadeIn 0.2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .help-menu-link {
+            color: #60a5fa;
+            background: none;
+            border: none;
+            text-align: left;
+            width: 100%;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        .help-menu-link:hover {
+            background: #60a5fa;
+            color: #222222;
+        }
     </style>
 </head>
 <body class="night-mode">
     <button class="toggle-btn" onclick="toggleMode()">Switch to Day Mode</button>
+
+    <button class="help-menu-btn" id="helpMenuBtn" aria-label="Open help menu">☰ Help</button>
+    <div class="help-menu-dropdown" id="helpMenuDropdown">
+        <a class="help-menu-link" href="https://scratch.mit.edu/join" target="_blank">Create a Scratch Account</a>
+        <a class="help-menu-link" href="https://scratch.mit.edu/projects/editor/?tutorial=all" target="_blank">Ideas to Code On</a>
+        <a class="help-menu-link" href="https://scratch.mit.edu/explore/projects/all" target="_blank">Explore Projects</a>
+        <button class="help-menu-link" id="showAddProject" type="button">Add Your Project</button>
+        <div id="addProjectInfo" style="display:none; padding: 10px 24px; color: #60a5fa; font-size: 0.98em; font-family: 'Poppins', Arial, sans-serif;">
+            <strong>How to Add Your Project:</strong><br>
+            <ul style="margin: 10px 0 10px 20px; text-align:left;">
+              <li><span class="gradient-text">Send your Scratch project link and a short instruction/description of your game</span></li>
+              <li><span class="gradient-text">Email to: <a href="mailto:testerofscratchcode@gmail.com" class="gradient-text gradient-link">testerofscratchcode@gmail.com</a></span></li>
+              <li><span class="gradient-text">I'll review and add the best ones to the site!</span></li>
+              <li><span class="gradient-text">Feel free to share your feedback or suggestions!</span></li>
+            </ul>
+        </div>
+    </div>
 
     <div class="logo">
         <img src="https://cdn2.scratch.mit.edu/get_image/user/105361166_60x60.png" alt="Prateek Priyadarshi">
@@ -829,7 +920,7 @@
                             <h3 style="color: #fbbf24;">🌟 Achievement:</h3>
                             <p>Created with passion by <a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a></p>
                             <p>Thank you <a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a> for allowing me to use your Project</p>
-                            <P>I would like you guys to check out here Profile<a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a> for more amazing up coming tutorials!</p>
+                            <P>I would like you guys to check out here Profile<a href="https://scratch.mit.edu/users/Mincraft_Youtuber/" style="color: #fbbf24;">@Mincraft_Youtuber</a> for more amazing up coming tutorials!</P>
                         </div>
                     </div>
                 </div>
@@ -1027,6 +1118,120 @@
 
         // Initialize on page load
         updateBestProjectDisplay();
+
+        // Help Menu Toggle
+        function toggleHelpMenu() {
+            const menu = document.getElementById('helpMenu');
+            menu.classList.toggle('show');
+        }
+
+        // Close help menu if clicked outside
+        window.addEventListener('click', function(event) {
+            const menu = document.getElementById('helpMenu');
+            if (!menu.contains(event.target) && !event.target.matches('.help-menu-btn')) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Help Menu Dropdown Logic
+        const helpMenuBtn = document.getElementById('helpMenuBtn');
+        const helpMenuDropdown = document.getElementById('helpMenuDropdown');
+        let helpMenuTimeout;
+
+        function showHelpMenu() {
+            clearTimeout(helpMenuTimeout);
+            helpMenuDropdown.classList.add('show');
+        }
+        function hideHelpMenu() {
+            helpMenuTimeout = setTimeout(() => {
+                helpMenuDropdown.classList.remove('show');
+            }, 200);
+        }
+        helpMenuBtn.addEventListener('mouseenter', showHelpMenu);
+        helpMenuBtn.addEventListener('mouseleave', hideHelpMenu);
+        helpMenuDropdown.addEventListener('mouseenter', showHelpMenu);
+        helpMenuDropdown.addEventListener('mouseleave', hideHelpMenu);
+        // Also show on click (for mobile)
+        helpMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            helpMenuDropdown.classList.toggle('show');
+        });
+        // Hide menu if clicking elsewhere
+        document.addEventListener('click', function(e) {
+            if (!helpMenuDropdown.contains(e.target) && e.target !== helpMenuBtn) {
+                helpMenuDropdown.classList.remove('show');
+            }
+        });
+
+        // Remove old contact info logic and add new menu logic for 'Add Your Project'
+        const showAddProjectBtn = document.createElement('button');
+        showAddProjectBtn.className = 'help-menu-link';
+        showAddProjectBtn.id = 'showAddProject';
+        showAddProjectBtn.type = 'button';
+        showAddProjectBtn.textContent = 'Add Your Project';
+
+        const addProjectInfo = document.createElement('div');
+        addProjectInfo.id = 'addProjectInfo';
+        addProjectInfo.style.display = 'none';
+        addProjectInfo.style.padding = '10px 24px';
+        addProjectInfo.style.color = '#fbbf24';
+        addProjectInfo.style.fontSize = '0.98em';
+        addProjectInfo.style.fontFamily = "'Poppins', Arial, sans-serif";
+        addProjectInfo.innerHTML = `
+            <strong>How to Add Your Project:</strong><br>
+            <ul style="margin: 10px 0 10px 20px; text-align:left;">
+              <li><span class="gradient-text">Send your Scratch project link and a short instruction/description of your game</span></li>
+              <li><span class="gradient-text">Email to: <a href="mailto:testerofscratchcode@gmail.com" class="gradient-text gradient-link">testerofscratchcode@gmail.com</a></span></li>
+              <li><span class="gradient-text">I'll review and add the best ones to the site!</span></li>
+              <li><span class="gradient-text">Feel free to share your feedback or suggestions!</span></li>
+            </ul>
+        `;
+
+        // Insert the new button and info into the help menu
+        const helpMenuDropdownEl = document.getElementById('helpMenuDropdown');
+        const showContactInfoBtnOld = document.getElementById('showContactInfo');
+        const contactInfoOld = document.getElementById('contactInfo');
+        if (showContactInfoBtnOld) showContactInfoBtnOld.remove();
+        if (contactInfoOld) contactInfoOld.remove();
+        // Remove duplicate 'Add Your Project' button and info if present
+        const addProjectBtnExisting = document.getElementById('showAddProject');
+        const addProjectInfoExisting = document.getElementById('addProjectInfo');
+        if (addProjectBtnExisting && addProjectBtnExisting.parentElement === helpMenuDropdownEl) {
+            helpMenuDropdownEl.removeChild(addProjectBtnExisting);
+        }
+        if (addProjectInfoExisting && addProjectInfoExisting.parentElement === helpMenuDropdownEl) {
+            helpMenuDropdownEl.removeChild(addProjectInfoExisting);
+        }
+        // Now add only one instance
+        helpMenuDropdownEl.appendChild(showAddProjectBtn);
+        helpMenuDropdownEl.appendChild(addProjectInfo);
+
+        // Hide all menu links except 'Add Your Project' info and show 'About Me' section
+        const helpMenuLinks = Array.from(document.querySelectorAll('#helpMenuDropdown > .help-menu-link')).filter(link => link !== showAddProjectBtn);
+        const aboutMeSection = document.querySelector('.about-me');
+
+        showAddProjectBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (addProjectInfo.style.display === 'none' || addProjectInfo.style.display === '') {
+                addProjectInfo.style.display = 'block';
+                helpMenuLinks.forEach(link => link.style.display = 'none');
+                showAddProjectBtn.style.display = 'none';
+                if (aboutMeSection) aboutMeSection.style.display = 'block';
+            } else {
+                addProjectInfo.style.display = 'none';
+                helpMenuLinks.forEach(link => link.style.display = '');
+                showAddProjectBtn.style.display = '';
+                if (aboutMeSection) aboutMeSection.style.display = '';
+            }
+        });
+        function resetHelpMenu() {
+            addProjectInfo.style.display = 'none';
+            helpMenuLinks.forEach(link => link.style.display = '');
+            showAddProjectBtn.style.display = '';
+            if (aboutMeSection) aboutMeSection.style.display = '';
+        }
+        helpMenuBtn.addEventListener('mouseleave', resetHelpMenu);
+        helpMenuDropdown.addEventListener('mouseleave', resetHelpMenu);
     </script>
 </body>
 </html>
