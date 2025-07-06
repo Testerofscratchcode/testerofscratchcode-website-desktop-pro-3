@@ -498,28 +498,73 @@
             border: none;
             cursor: pointer;
             border-radius: 25px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s cubic-bezier(.4,2,.6,1);
             z-index: 1001;
-            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4), 0 0 18px 2px #60a5fa80;
+            outline: 2px solid transparent;
+            outline-offset: 0px;
+            animation: helpBtnGlow 2s infinite alternate;
+        }
+        @keyframes helpBtnGlow {
+            0% { box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4), 0 0 18px 2px #60a5fa80; }
+            100% { box-shadow: 0 4px 25px rgba(96, 165, 250, 0.7), 0 0 32px 6px #a78bfa80; }
         }
         .help-menu-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.6);
+            transform: scale(1.08) rotate(-2deg);
+            box-shadow: 0 6px 30px #60a5fa, 0 0 32px 8px #a78bfa;
+            outline: 2px solid #a78bfa;
+            outline-offset: 2px;
+        }
+        /* Day mode styles for help menu button */
+        .day-mode .help-menu-btn {
+            background: linear-gradient(45deg, #fbbf24, #fde68a);
+            color: #222;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3), 0 0 18px 2px #fbbf2480;
+            animation: helpBtnGlowDay 2s infinite alternate;
+        }
+        @keyframes helpBtnGlowDay {
+            0% { box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3), 0 0 18px 2px #fbbf2480; }
+            100% { box-shadow: 0 4px 25px rgba(251, 191, 36, 0.7), 0 0 32px 6px #fde68a80; }
+        }
+        .day-mode .help-menu-btn:hover {
+            box-shadow: 0 6px 30px #fbbf24, 0 0 32px 8px #fde68a;
+            outline: 2px solid #fbbf24;
+            outline-offset: 2px;
         }
         .help-menu-dropdown {
             display: none;
             position: fixed;
             top: 60px;
             right: 20px;
-            background: rgba(31, 41, 55, 0.98);
-            border: 2px solid #60a5fa;
+            background: rgba(31, 41, 55, 0.92);
+            border: 2.5px solid #60a5fa;
             border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(96, 165, 250, 0.25);
-            min-width: 220px;
-            padding: 12px 0;
+            box-shadow: 0 8px 32px 0 rgba(96, 165, 250, 0.25), 0 0 24px 2px #a78bfa40;
+            min-width: 240px;
+            padding: 16px 0 12px 0;
             z-index: 1002;
             flex-direction: column;
             align-items: flex-start;
+            backdrop-filter: blur(18px) saturate(1.2);
+            transition: background 0.4s, border 0.4s, box-shadow 0.4s;
+            animation: dropdownBorderAnim 3s infinite linear alternate;
+        }
+        @keyframes dropdownBorderAnim {
+            0% { border-color: #60a5fa; }
+            50% { border-color: #a78bfa; }
+            100% { border-color: #60a5fa; }
+        }
+        /* Day mode styles for help menu dropdown */
+        .day-mode .help-menu-dropdown {
+            background: rgba(255, 255, 255, 0.96);
+            border: 2.5px solid #fbbf24;
+            box-shadow: 0 8px 32px rgba(251, 191, 36, 0.18), 0 0 24px 2px #fde68a40;
+            animation: dropdownBorderAnimDay 3s infinite linear alternate;
+        }
+        @keyframes dropdownBorderAnimDay {
+            0% { border-color: #fbbf24; }
+            50% { border-color: #fde68a; }
+            100% { border-color: #fbbf24; }
         }
         .help-menu-dropdown.show {
             display: flex;
@@ -539,12 +584,28 @@
             font-size: 1em;
             font-family: inherit;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
+            border-radius: 12px;
         }
         .help-menu-link:hover {
-            background: #60a5fa;
+            background: linear-gradient(90deg, #60a5fa33, #a78bfa33);
             color: #222222;
+            transform: scale(1.06) translateX(4px);
+            box-shadow: 0 2px 12px #60a5fa44;
+        }
+        /* Day mode styles for help menu links */
+        .day-mode .help-menu-link {
+            color: #fbbf24;
+        }
+        .day-mode .help-menu-link:hover {
+            background: linear-gradient(90deg, #fbbf2433, #fde68a33);
+            color: #222222;
+            box-shadow: 0 2px 12px #fbbf2444;
+        }
+        /* Day mode for add project info */
+        .day-mode #addProjectInfo {
+            color: #fbbf24;
         }
     </style>
 </head>
